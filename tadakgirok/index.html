@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>타닥기록 TypeJotter — 타자기 감성 일상기록앱</title>
+<meta name="description" content="기계식 타자기의 감성으로, 기록에만 집중하는 간결한 기록장. 쓰는 줄은 늘 그 자리에.">
+<meta property="og:title" content="타닥기록 TypeJotter">
+<meta property="og:description" content="타자기처럼, 쓰는 줄은 늘 그 자리에. 기록에만 집중하는 간결한 기록장.">
+<meta property="og:image" content="https://jsilver-p.github.io/tadakgirok/icon-512.png">
+<link rel="icon" href="icon-192.png">
+<link rel="stylesheet" href="bbul.css">
+<!-- 배치는 claude.ai/design 프로젝트 338588cc의 「BBUL 제품 상세 페이지.dc.html」을 그대로 옮긴 것이다.
+     DS 컴포넌트(Button·Card·Badge·Icon·TextSizeToggle)는 같은 토큰으로 여기서 직접 그린다.
+     주소 셋의 출처: analogtypo/scripts/config.mjs(PLAY_URL·ORIGIN·CONTACT) — 바뀌면 여기도. -->
+<style>
+  .wrap{min-height:100vh;display:flex;flex-direction:column;background:var(--color-canvas);color:var(--color-text);font-size:var(--fs-body);line-height:var(--lh-body);letter-spacing:var(--ls-body);text-wrap:pretty;word-break:keep-all}
+  .container{max-width:var(--container-lg);margin:0 auto;padding:0 var(--pad-screen);width:100%}
+  header.top{position:sticky;top:0;z-index:5;background:var(--color-canvas);border-bottom:1px solid var(--color-border)}
+  header.top .container{min-height:72px;display:flex;align-items:center;gap:24px}
+  .brand{font-weight:var(--fw-heavy);font-size:17px;line-height:1;letter-spacing:.24em;color:var(--color-text-strong)}
+  nav{margin-left:auto;display:flex;align-items:center;gap:24px}
+  nav a{font-size:var(--fs-body-sm);line-height:1;color:var(--color-text-muted);font-weight:var(--fw-regular)}
+  nav a[aria-current]{color:var(--color-text-strong);font-weight:var(--fw-semibold)}
+  nav a:hover{text-decoration:none;color:var(--color-text-strong)}
+  /* TextSizeToggle variant=button */
+  .sizebtn{display:inline-flex;align-items:center;gap:var(--gap-inline);height:var(--control-h-desktop-md);padding:0 14px;border:1px solid var(--color-border-strong);border-radius:var(--radius-button-md);background:var(--color-canvas);font-size:var(--fs-button-sm);font-weight:var(--fw-semibold);line-height:1;color:var(--color-text-strong);cursor:pointer;transition:var(--transition-control)}
+  .sizebtn:hover{background:var(--color-surface-subtle)}
+  .sizebtn[aria-pressed=true]{background:var(--color-action-weak);border-color:transparent;color:var(--color-action-weak-fg)}
+  .back{display:inline-flex;align-items:center;gap:var(--gap-inline);min-height:var(--touch-min);font-size:var(--fs-body-sm);font-weight:var(--fw-semibold);color:var(--color-text-muted)}
+  .back:hover{text-decoration:none;color:var(--color-text-strong)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:var(--space-14);padding:var(--space-7) 0 var(--space-14);align-items:start}
+  @media (max-width:900px){.grid{gap:var(--space-11)}}
+  .kind{display:block;font-size:var(--fs-caption);line-height:var(--lh-caption);letter-spacing:.12em;color:var(--color-text-muted)}
+  h1{margin-top:var(--space-5);font-weight:var(--fw-bold);font-size:var(--fs-display-2);line-height:var(--lh-display-2);letter-spacing:var(--ls-display-2);color:var(--color-text-strong)}
+  h1 small{display:block;font-weight:var(--fw-medium);font-size:var(--fs-body-sm);letter-spacing:.2em;color:var(--color-text-muted);margin-top:var(--space-3)}
+  .one{margin-top:var(--space-5);font-size:var(--fs-body-lg);line-height:var(--lh-body-lg);letter-spacing:var(--ls-body-lg);color:var(--color-text)}
+  .date{display:block;margin-top:var(--space-6);font-size:var(--fs-caption);line-height:var(--lh-caption);color:var(--color-text-muted);font-variant-numeric:tabular-nums}
+  /* 갤러리 — 세로 폰 화면(471×1019) 셋. Image 컴포넌트의 테두리·둥글기. */
+  .gallery{margin-top:var(--space-9);display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-5)}
+  @media (max-width:520px){.gallery{grid-template-columns:repeat(3,1fr);gap:var(--space-3)}}
+  .shot{position:relative;aspect-ratio:471/1019;border-radius:var(--radius-image-lg);overflow:hidden;background:var(--color-media-placeholder);box-shadow:var(--inset-media),var(--shadow-media)}
+  .shot img{width:100%;height:100%;object-fit:cover}
+  .shot span{position:absolute;left:0;right:0;bottom:0;padding:var(--space-4) var(--space-5);font-size:var(--fs-caption);line-height:var(--lh-caption);color:#fff;background:linear-gradient(to top,rgba(15,18,22,.78) 0%,rgba(15,18,22,.45) 34%,rgba(15,18,22,0) 100%)}
+  h2{margin:0 0 var(--space-6);font-weight:var(--fw-bold);font-size:var(--fs-title-3);line-height:var(--lh-title-3);letter-spacing:var(--ls-title-3);color:var(--color-text-strong)}
+  section.block{margin-top:var(--gap-block)}
+  .points{display:flex;flex-direction:column;gap:var(--gap-default);margin-top:var(--space-8)}
+  .points span{display:flex;align-items:flex-start;gap:var(--gap-inline);font-size:var(--fs-body-sm);line-height:var(--lh-body-sm)}
+  .points svg{flex:none;width:var(--icon-md);height:var(--icon-md);margin-top:3px;color:var(--color-action)}
+  .changes{display:flex;flex-direction:column;gap:var(--space-7)}
+  .changes .row{display:flex;gap:var(--space-6);align-items:baseline}
+  .changes .v{flex:none;width:52px;font-weight:var(--fw-semibold);font-size:var(--fs-body-sm);color:var(--color-text-strong);font-variant-numeric:tabular-nums}
+  .changes .t{flex:1;min-width:0;display:flex;flex-direction:column;gap:var(--space-1)}
+  .changes .t span:first-child{font-size:var(--fs-body-sm);line-height:var(--lh-body-sm)}
+  .changes .t span:last-child{font-size:var(--fs-caption);line-height:var(--lh-caption);color:var(--color-text-muted);font-variant-numeric:tabular-nums}
+  /* Card tone=plain */
+  .card{position:sticky;top:96px;padding:var(--space-8);border:1px solid var(--color-border);border-radius:var(--radius-card);background:var(--color-canvas)}
+  @media (max-width:900px){.card{position:static}}
+  .badge{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:var(--radius-badge);font-size:var(--fs-caption);font-weight:var(--fw-semibold);line-height:1;background:var(--color-success-weak);color:var(--color-success-fg)}
+  .plat{display:flex;flex-direction:column;margin-top:var(--space-6)}
+  .plat .cap{font-size:var(--fs-caption);color:var(--color-text-muted);padding-bottom:var(--space-4)}
+  .plat .row{display:flex;align-items:center;gap:var(--space-5);padding:var(--space-5) 0;border-top:1px solid var(--color-divider)}
+  .plat .row .t{flex:1;min-width:0;display:flex;flex-direction:column;gap:var(--space-1)}
+  .plat .row .t b{font-weight:var(--fw-semibold);font-size:var(--fs-body);color:var(--color-text-strong)}
+  .plat .row .t span{font-size:var(--fs-caption);color:var(--color-text-muted)}
+  /* Button — weak / primary / outline */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--gap-inline);height:var(--control-h-desktop-md);padding:0 16px;border-radius:var(--radius-button-md);border:1px solid transparent;font-size:var(--fs-button-sm);font-weight:var(--fw-semibold);line-height:1;letter-spacing:var(--ls-button);cursor:pointer;text-decoration:none;white-space:nowrap;transition:var(--transition-control)}
+  .btn:hover{text-decoration:none}
+  .btn:active{transform:scale(var(--press-scale))}
+  .btn.weak{background:var(--color-action-weak);color:var(--color-action-weak-fg)}
+  .btn.weak:hover{background:var(--color-action-weak-hover);color:var(--color-action-weak-fg)}
+  .btn.primary{background:var(--color-action);color:var(--color-on-action)}
+  .btn.primary:hover{background:var(--color-action-hover);color:var(--color-on-action)}
+  .btn.outline{background:transparent;border-color:var(--color-border-strong);color:var(--color-text-strong)}
+  .btn.outline:hover{background:var(--color-surface-subtle);color:var(--color-text-strong)}
+  .btn.lg{height:var(--control-h-lg);font-size:var(--fs-button);border-radius:var(--radius-button-lg);width:100%}
+  .btn.lg:active{transform:scale(var(--press-scale-large))}
+  .btn[aria-disabled=true]{background:var(--color-surface);color:var(--color-text-disabled);cursor:default;pointer-events:none}
+  .ctas{display:flex;flex-direction:column;gap:var(--gap-tight);margin-top:var(--space-6)}
+  /* 쓰는 법 */
+  #usage{border-top:1px solid var(--color-border);padding:var(--space-10) 0 var(--space-14)}
+  #usage h2.big{font-size:var(--fs-title-2);line-height:var(--lh-title-2);letter-spacing:var(--ls-title-2);margin-bottom:var(--space-8)}
+  .how{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--space-11);margin-top:var(--space-9)}
+  .how h3{font-weight:var(--fw-bold);font-size:var(--fs-title-3);line-height:var(--lh-title-3);letter-spacing:var(--ls-title-3);color:var(--color-text-strong);margin:0 0 var(--space-5)}
+  .how ol{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:var(--space-3);font-size:var(--fs-body-sm);line-height:var(--lh-body-sm)}
+  .how .pics{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--space-4);margin-top:var(--space-6)}
+  .how .pics figure{margin:0}
+  .how .pics img{width:100%;aspect-ratio:390/844;object-fit:cover;object-position:top;border-radius:var(--radius-image);box-shadow:var(--inset-media),var(--shadow-1);background:var(--color-media-placeholder)}
+  .how figcaption{margin-top:var(--space-3);font-size:var(--fs-caption);line-height:var(--lh-caption);color:var(--color-text-muted)}
+  footer{border-top:1px solid var(--color-border);background:var(--color-surface-subtle)}
+  footer .container{padding:var(--space-9) var(--pad-screen);display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--space-8)}
+  footer .brand{font-size:15px}
+  footer span,footer a{font-size:var(--fs-caption);color:var(--color-text-muted)}
+  footer .r{margin-left:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="container">
+      <a class="brand" href="/" style="text-decoration:none">BBUL</a>
+      <nav>
+        <a href="#" aria-current="page">제품</a>
+        <a href="#usage">쓰는 법</a>
+        <a href="mailto:jsilver.kim.p@gmail.com?subject=%5B%ED%83%80%EB%8B%A5%EA%B8%B0%EB%A1%9D%5D%20%EB%AC%B8%EC%9D%98">문의</a>
+        <button class="sizebtn" id="sizeToggle" type="button" aria-pressed="false" title="큰 글씨 모드">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+          큰 글씨
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container" style="flex:1">
+    <div style="padding:var(--space-9) 0 0">
+      <a class="back" href="/">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+        제품 전체
+      </a>
+    </div>
+
+    <div class="grid">
+      <div style="min-width:0">
+        <span class="kind">모바일 앱</span>
+        <h1>타닥기록<small>TYPEJOTTER</small></h1>
+        <p class="one">기계식 타자기의 감성으로, 기록에만 집중하는 간결한 기록장. 쓰는 줄은 늘 그 자리에.</p>
+        <span class="date" id="dateLabel">최신 버전 1.2.0 · 2026.09.07 업데이트</span>
+
+        <div class="gallery" aria-label="제품 화면">
+          <figure class="shot"><img src="gif/01-lines.gif" alt="타자기처럼 쓰는 줄은 그 자리에, 종이가 올라간다"><span>쓰는 줄은 그 자리에</span></figure>
+          <figure class="shot"><img src="gif/03-book.gif" alt="수첩을 만들고 갈아타며 적는다"><span>수첩을 바꿔 가며</span></figure>
+          <figure class="shot"><img src="gif/04-seek.gif" alt="찾을 말을 적으면 그 줄만 모인다"><span>단어 하나면 그 줄로</span></figure>
+        </div>
+
+        <section class="block">
+          <h2>어떤 제품인가요</h2>
+          <p style="font-size:var(--fs-body);line-height:var(--lh-body)">기계식 타자기처럼 입력하는 줄은 움직이지 않고 종이가 움직입니다. 글이 쌓이면 종이가 올라가고, 쓰는 줄은 자판에 가려지지 않습니다. 새 글을 누르고 제목을 붙이고 날짜를 적는 일이 없습니다. 열고, 적고, 덮습니다. 기록은 내 폰 안에만 남고 계정도 서버도 광고도 없습니다.</p>
+          <div class="points">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>기능이 많을수록 기록은 오래가지 못합니다. 꼭 필요한 것만 남겼습니다.</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>쓰는 줄은 가려지지도, 움직이지도 않습니다.</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>자판은 올라와 있고, 날짜는 저절로 남습니다.</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>쓰고, 나누고, 찾기. 탭 한 번입니다.</span>
+          </div>
+        </section>
+
+        <section class="block">
+          <h2>바뀐 것</h2>
+          <div class="changes" id="changes">
+            <div class="row"><span class="v">1.2.0</span><span class="t"><span>구글 플레이 스토어에 첫 판. 앱 이름을 「타닥기록」으로, 앱 안에 문의하기.</span><span>2026.09.07</span></span></div>
+            <div class="row"><span class="v">1.1</span><span class="t"><span>수첩 전환을 앱 안에서. 읽기 블록 지우기·되돌리기, 쓰기금지 모드, 삼성 자판 실측 손질.</span><span>2026.09.05</span></span></div>
+          </div>
+        </section>
+      </div>
+
+      <div style="min-width:0">
+        <div class="card">
+          <span style="display:flex;align-items:center;gap:var(--space-5)"><span class="badge">사용 가능</span></span>
+          <div class="plat">
+            <span class="cap">쓰는 기기를 골라요</span>
+            <div class="row">
+              <span class="t"><b>안드로이드</b><span>삼성 · LG 등 안드로이드 휴대폰 · 태블릿 · 구글 플레이 스토어</span></span>
+              <a class="btn weak" href="https://play.google.com/store/apps/details?id=com.actioners.tadakgirok" rel="noopener">받기</a>
+            </div>
+            <div class="row">
+              <span class="t"><b>웹 브라우저</b><span>설치 없이 크롬·사파리에서 · 홈 화면에 추가하면 앱처럼</span></span>
+              <a class="btn weak" href="https://ajournal.pages.dev/" rel="noopener">열기</a>
+            </div>
+            <div class="row">
+              <span class="t"><b>아이폰 · 아이패드</b><span>애플 휴대폰 · 태블릿 · 준비하고 있어요</span></span>
+              <span class="btn weak" aria-disabled="true">준비 중</span>
+            </div>
+          </div>
+          <div class="ctas">
+            <a class="btn primary lg" href="https://play.google.com/store/apps/details?id=com.actioners.tadakgirok" rel="noopener">구글 플레이에서 받기</a>
+            <a class="btn outline lg" href="#usage">쓰는 법 보기</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <section id="usage">
+      <h2 class="big">쓰는 법</h2>
+      <p style="font-size:var(--fs-body);line-height:var(--lh-body);max-width:640px">손가락 원이 「여기를 누르세요」입니다. 아래 열쇠 넷(수첩·색인·진동·설정)과 읽기/쓰기 열쇠가 전부입니다.</p>
+      <div class="how">
+        <div>
+          <h3>기록하기</h3>
+          <ol>
+            <li>입력하고 싶은 줄을 누르세요. 그 줄이 쓰는 자리로 올라옵니다.</li>
+            <li>그대로 입력하세요. 날짜는 저절로 남습니다.</li>
+            <li>그만 쓰고 싶으면 빈 종이를 누르세요. 자판이 내려갑니다.</li>
+            <li>읽기에 집중하고 싶을 땐 아래 열쇠로 쓰기금지 모드로 바꾸세요.</li>
+          </ol>
+          <div class="pics">
+            <figure><img src="usage/write-1.png" alt="" loading="lazy"><figcaption>입력하고 싶은 줄을 누른다</figcaption></figure>
+            <figure><img src="usage/write-2.png" alt="" loading="lazy"><figcaption>빈 종이를 눌러 자판을 내린다</figcaption></figure>
+            <figure><img src="usage/write-3.png" alt="" loading="lazy"><figcaption>아래 열쇠로 쓰기금지 모드</figcaption></figure>
+          </div>
+        </div>
+        <div>
+          <h3>수첩 나누기</h3>
+          <ol>
+            <li>일상, 목표, 아이디어처럼 수첩을 나눠 적을 수 있습니다.</li>
+            <li>아래 수첩 열쇠를 누르면 수첩판이 펼쳐집니다.</li>
+            <li>수첩을 두 번 누르면 그 수첩으로 갈아탑니다.</li>
+            <li>새 수첩은 이름만 적으면 바로 펼쳐집니다.</li>
+          </ol>
+          <div class="pics">
+            <figure><img src="usage/book-1.png" alt="" loading="lazy"><figcaption>아래 수첩 열쇠를 누른다</figcaption></figure>
+            <figure><img src="usage/book-2.png" alt="" loading="lazy"><figcaption>수첩을 두 번 누르면 갈아탄다</figcaption></figure>
+            <figure><img src="usage/book-3.png" alt="" loading="lazy"><figcaption>새 수첩</figcaption></figure>
+          </div>
+        </div>
+        <div>
+          <h3>찾기</h3>
+          <ol>
+            <li>아래 색인 열쇠를 누르고 찾을 말을 적으세요.</li>
+            <li>그 말이 적힌 줄이 날짜와 함께 모입니다.</li>
+            <li>한 줄을 누르면 그 날 그 줄로 돌아갑니다.</li>
+            <li>지난 날 목록에서 날짜로 바로 갈 수도 있습니다.</li>
+          </ol>
+          <div class="pics">
+            <figure><img src="usage/seek-1.png" alt="" loading="lazy"><figcaption>아래 색인 열쇠를 누른다</figcaption></figure>
+            <figure><img src="usage/seek-2.png" alt="" loading="lazy"><figcaption>찾은 줄을 누르면 그 날로</figcaption></figure>
+          </div>
+        </div>
+        <div>
+          <h3>나에게 맞게 설정하기</h3>
+          <ol>
+            <li>아래 설정 열쇠를 누르면 설정판이 펼쳐집니다.</li>
+            <li>글씨체와 글자 크기, 종이의 색과 줄을 고를 수 있습니다.</li>
+            <li>고른 대로 종이가 바로 바뀝니다.</li>
+            <li>진동은 아래 진동 열쇠로 켜고 끕니다.</li>
+          </ol>
+          <div class="pics">
+            <figure><img src="usage/set-1.png" alt="" loading="lazy"><figcaption>아래 설정 열쇠를 누른다</figcaption></figure>
+            <figure><img src="usage/set-2.png" alt="" loading="lazy"><figcaption>글씨체·크기·종이색·줄을 고른다</figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span class="brand">BBUL</span>
+      <a href="mailto:jsilver.kim.p@gmail.com?subject=%5B%ED%83%80%EB%8B%A5%EA%B8%B0%EB%A1%9D%5D%20%EB%AC%B8%EC%9D%98">문의는 메일로 받아요 · jsilver.kim.p@gmail.com</a>
+      <a href="privacy.html">개인정보처리방침</a>
+      <span class="r">© BBUL</span>
+    </div>
+  </footer>
+</div>
+<script>
+  /* 큰 글씨 — DS의 TextSizeToggle. 고른 것은 이 브라우저에만 남는다. */
+  (function(){
+    var b=document.getElementById('sizeToggle'), K='bbul-large', on=false;
+    try{on=localStorage.getItem(K)==='1'}catch(e){}
+    function apply(){document.documentElement.classList.toggle('bbul-large',on);b.setAttribute('aria-pressed',String(on))}
+    b.addEventListener('click',function(){on=!on;try{localStorage.setItem(K,on?'1':'0')}catch(e){}apply()});
+    apply();
+  })();
+  /* 최신 버전 — 앱 배포 오리진의 version.json(CORS 열림)이 진실. 못 받으면 적힌 글 그대로. */
+  fetch('https://ajournal.pages.dev/version.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(v){
+    var d=(v.build||'').slice(0,10).replace(/-/g,'.');
+    if(v.version) document.getElementById('dateLabel').textContent='최신 버전 '+v.version+(d?' · '+d+' 업데이트':'');
+  }).catch(function(){});
+</script>
+</body>
+</html>

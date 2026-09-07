@@ -1,0 +1,74 @@
+/* BBUL 디자인 시스템 토큰 — claude.ai/design 프로젝트 ec6016f6의 tokens/*.css에서 이 페이지가 쓰는 것만 옮겼다.
+   (colors · typography · spacing · radius · elevation · motion · scale(.bbul-large) · base)
+   원본을 고치면 여기도 맞춘다. 하드코딩한 색·크기는 넣지 않는다. */
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+:root{
+  --bbul-green-50:#f4f7f6;--bbul-green-100:#e5eceb;--bbul-green-200:#c7d7d4;--bbul-green-300:#a1bcb8;--bbul-green-400:#739a94;
+  --bbul-green-500:#447971;--bbul-green-600:#3a655f;--bbul-green-700:#2f524e;--bbul-green-800:#253e3d;--bbul-green-900:#1b2d2d;
+  --bbul-clay-50:#faf5f6;--bbul-clay-500:#cb9aa1;--bbul-clay-600:#a88087;--bbul-clay-700:#745a60;
+  --ink-0:#ffffff;--ink-25:#fafbfc;--ink-50:#f5f7f9;--ink-100:#edf0f4;--ink-200:#dee3ea;--ink-300:#c6cdd7;--ink-400:#98a2b0;
+  --ink-500:#78828f;--ink-600:#5a6472;--ink-700:#414a57;--ink-800:#272e38;--ink-900:#14181f;--ink-950:#0f1216;
+  --green-50:#e6f7f1;--green-500:#0e9e6e;--green-700:#0a7a55;--amber-50:#fff6e0;--amber-700:#9a6200;
+
+  --color-canvas:var(--ink-0);--color-canvas-alt:var(--ink-50);--color-surface:var(--ink-100);--color-surface-subtle:var(--ink-25);--color-elevated:var(--ink-0);
+  --color-text-strong:var(--ink-900);--color-text:var(--ink-700);--color-text-muted:var(--ink-500);--color-text-disabled:var(--ink-400);--color-text-inverse:var(--ink-0);
+  --color-text-link:var(--bbul-green-600);--color-text-link-hover:var(--bbul-green-700);
+  --color-border:var(--ink-200);--color-border-strong:var(--ink-300);--color-divider:var(--ink-100);
+  --color-action:var(--bbul-green-500);--color-action-hover:var(--bbul-green-600);--color-action-pressed:var(--bbul-green-700);
+  --color-action-weak:var(--bbul-green-50);--color-action-weak-hover:var(--bbul-green-100);--color-action-weak-fg:var(--bbul-green-700);--color-on-action:var(--ink-0);
+  --color-focus-ring:rgba(68,121,113,.32);
+  --color-success:var(--green-500);--color-success-weak:var(--green-50);--color-success-fg:var(--green-700);
+  --color-warning-weak:var(--amber-50);--color-warning-fg:var(--amber-700);
+  --color-media-frame:rgba(20,24,31,.08);--color-media-placeholder:var(--ink-100);
+
+  --font-core:'Pretendard Variable',Pretendard,-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic',system-ui,'Segoe UI',sans-serif;
+  --font-display:var(--font-core);
+  --fw-regular:400;--fw-medium:500;--fw-semibold:600;--fw-bold:700;--fw-heavy:800;
+  --fs-display-2:30px;--lh-display-2:38px;--ls-display-2:-.03em;
+  --fs-title-2:21px;--lh-title-2:29px;--ls-title-2:-.022em;
+  --fs-title-3:18px;--lh-title-3:26px;--ls-title-3:-.018em;
+  --fs-body-lg:17px;--lh-body-lg:27px;--ls-body-lg:-.012em;
+  --fs-body:16px;--lh-body:25px;--ls-body:-.011em;
+  --fs-body-sm:14px;--lh-body-sm:21px;--ls-body-sm:-.006em;
+  --fs-caption:13px;--lh-caption:18px;--ls-caption:0em;
+  --fs-button:15px;--lh-button:1;--ls-button:-.01em;--fs-button-sm:14px;
+
+  --space-1:2px;--space-2:4px;--space-3:6px;--space-4:8px;--space-5:12px;--space-6:16px;--space-7:20px;--space-8:24px;--space-9:32px;
+  --space-10:40px;--space-11:48px;--space-12:64px;--space-13:80px;--space-14:120px;
+  --gap-inline:8px;--gap-tight:10px;--gap-default:14px;--gap-section:28px;--gap-block:44px;--pad-card:18px;
+  --pad-screen-mobile:18px;--pad-screen-desktop:28px;--pad-screen:var(--pad-screen-mobile);
+  --touch-min:44px;--control-h-md:40px;--control-h-lg:48px;--control-h-desktop-md:38px;--control-h-desktop-lg:44px;
+  --icon-md:20px;--icon-lg:24px;--container-lg:1120px;
+
+  --radius-xs:4px;--radius-sm:6px;--radius-md:9px;--radius-lg:13px;--radius-full:999px;
+  --radius-button-md:9px;--radius-button-lg:12px;--radius-badge:5px;--radius-card:13px;--radius-image:10px;--radius-image-lg:15px;
+
+  --shadow-1:0 1px 2px rgba(20,24,31,.06),0 1px 3px rgba(20,24,31,.04);
+  --shadow-2:0 2px 8px rgba(20,24,31,.06),0 8px 24px -10px rgba(20,24,31,.12);
+  --shadow-focus:0 0 0 4px var(--color-focus-ring);
+  --shadow-media:0 2px 6px rgba(20,24,31,.06),0 12px 32px -12px rgba(20,24,31,.18);
+  --inset-media:inset 0 0 0 1px var(--color-media-frame);
+
+  --dur-fast:120ms;--dur-base:200ms;--ease-out:cubic-bezier(.16,1,.3,1);--press-scale:.97;--press-scale-large:.985;
+  --transition-control:background-color var(--dur-fast) var(--ease-out),color var(--dur-fast) var(--ease-out),border-color var(--dur-fast) var(--ease-out),box-shadow var(--dur-fast) var(--ease-out),transform var(--dur-fast) var(--ease-out);
+}
+@media (min-width:768px){:root{--pad-screen:var(--pad-screen-desktop)}}
+@media (prefers-reduced-motion:reduce){:root{--dur-fast:0ms;--dur-base:0ms;--press-scale:1;--press-scale-large:1}}
+/* 큰 글씨 모드 — 글자와 손 닿는 것만 커지고 배치는 그대로. */
+.bbul-large{
+  --fs-display-2:34px;--lh-display-2:42px;--fs-title-2:24px;--lh-title-2:33px;--fs-title-3:21px;--lh-title-3:30px;
+  --fs-body-lg:20px;--lh-body-lg:31px;--fs-body:19px;--lh-body:30px;--fs-body-sm:17px;--lh-body-sm:26px;--fs-caption:15px;--lh-caption:21px;
+  --fs-button:18px;--fs-button-sm:16px;--touch-min:52px;--control-h-md:48px;--control-h-lg:56px;--control-h-desktop-md:44px;--control-h-desktop-lg:52px;
+  --icon-md:24px;--icon-lg:30px;--gap-inline:10px;--gap-tight:14px;--gap-default:18px;--pad-card:22px;
+}
+/* base */
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--color-canvas);color:var(--color-text-strong);font-family:var(--font-core);font-weight:var(--fw-regular);font-size:var(--fs-body);line-height:var(--lh-body);letter-spacing:var(--ls-body);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+h1,h2,h3,h4,p,figure{margin:0}
+img,svg,video{display:block;max-width:100%}
+button,input{font:inherit;letter-spacing:inherit;color:inherit}
+a{color:var(--color-text-link);text-decoration:none;font-weight:var(--fw-semibold);text-underline-offset:3px}
+a:hover{color:var(--color-text-link-hover);text-decoration:underline}
+:focus-visible{outline:none;box-shadow:var(--shadow-focus);border-radius:var(--radius-xs)}
+::selection{background:var(--color-action-weak);color:var(--color-action-weak-fg)}
