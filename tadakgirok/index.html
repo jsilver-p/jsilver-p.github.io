@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>타닥기록 TypeJotter — 타자기 감성 일상기록앱</title>
-<meta name="description" content="기계식 타자기처럼, 입력하는 줄은 움직이지 않고 종이가 움직입니다. 복잡한 기능을 걷어내고 기록 자체에 집중할 수 있는 간결한 기록앱.">
+<meta name="description" content="기계식 타자기의 감성을 담은, 쓰기에 집중할 수 있는 간결한 기록앱. 쓰는 곳은 움직이거나 가려지지 않습니다.">
 <meta property="og:title" content="타닥기록 TypeJotter">
-<meta property="og:description" content="타자기처럼, 쓰는 줄은 늘 그 자리에. 기록에만 집중하는 간결한 기록앱.">
+<meta property="og:description" content="기계식 타자기의 감성을 담은, 쓰기에 집중할 수 있는 간결한 기록앱.">
 <meta property="og:image" content="https://jsilver-p.github.io/tadakgirok/icon-512.png">
 <link rel="icon" href="icon-192.png">
 <link rel="stylesheet" href="bbul.css">
@@ -49,13 +49,6 @@
   .shot{aspect-ratio:471/1019;border-radius:var(--radius-image-lg);overflow:hidden;background:var(--color-media-placeholder);box-shadow:var(--inset-media),var(--shadow-media)}
   .shot img{width:100%;height:100%;object-fit:cover;object-position:top}
   @media (max-width:480px){.feat{grid-template-columns:minmax(0,1fr) 128px;gap:var(--space-5)}}
-  /* 02의 대비표 */
-  .vs{display:grid;grid-template-columns:1fr 1px 1fr;gap:var(--space-6);margin:var(--space-6) 0}
-  .vs .line{background:var(--color-border)}
-  .vs .cap{display:block;font-size:var(--fs-caption);letter-spacing:.12em;color:var(--color-text-muted);margin-bottom:var(--space-4)}
-  .vs ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--space-3);font-size:var(--fs-body-sm);line-height:var(--lh-body-sm)}
-  .vs .old ul{color:var(--color-text-muted)}
-  .vs .new ul{color:var(--color-text-strong);font-weight:var(--fw-semibold)}
   .points{display:flex;flex-direction:column;gap:var(--gap-default)}
   .points span{display:flex;align-items:flex-start;gap:var(--gap-inline);font-size:var(--fs-body-sm);line-height:var(--lh-body-sm)}
   .points svg{flex:none;width:var(--icon-md);height:var(--icon-md);margin-top:3px;color:var(--color-action)}
@@ -130,8 +123,19 @@
       <div style="min-width:0">
         <span class="kind">모바일 앱</span>
         <h1>타닥기록<small>TYPEJOTTER</small></h1>
-        <p class="one">기계식 타자기처럼, 입력하는 줄은 움직이지 않고 종이가 움직입니다. 복잡한 기능을 걷어내고 기록 자체에 집중할 수 있는 간결한 기록앱.</p>
+        <p class="one">기계식 타자기의 감성을 담은, 「쓰기」에 집중할 수 있는 간결한 기록앱.</p>
         <span class="date" id="dateLabel">최신 버전 1.2.0 · 2026.09.07 업데이트</span>
+
+        <section class="block">
+          <h2>한눈에</h2>
+          <div class="points">
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>기계식 타자기의 감성과, 움직이거나 가려지지 않는 입력 자리로 「쓰기」 자체에 집중하게 합니다.</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>복잡한 기능 대신 간결함과 쉬운 사용으로 「기록」을 습관처럼 이어 가게 합니다.</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>앱을 열면 바로 기록할 수 있고, 날짜는 자동으로 함께 남습니다.</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>수첩 나누기와 내 기록 찾기, 탭 한 번이면 됩니다.</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>기록은 내 기기 안에만 저장됩니다.</span>
+          </div>
+        </section>
 
         <section class="block">
           <h2>어떤 제품인가요</h2>
@@ -140,7 +144,7 @@
             <div>
               <span class="no">01</span>
               <h3>타자기처럼, 쓰는 줄은 늘 그 자리에</h3>
-              <p>기계식 타자기의 감성으로, 기록에만 집중하는 간결한 기록장. 글이 쌓이면 종이가 올라가고, 쓰는 줄은 자판에 가려지지 않습니다.</p>
+              <p>쓰는 곳은 움직이거나 가려지지 않습니다. 글이 쌓이면 종이가 올라갑니다. 기록 자체에 집중하며 가볍게 기록합니다.</p>
             </div>
             <figure class="shot"><img src="gif/01-lines.gif" alt="네 줄을 치는 동안 쓰는 줄은 그 자리에 있고 종이가 올라간다"></figure>
           </div>
@@ -149,12 +153,7 @@
             <div>
               <span class="no">02</span>
               <h3>기록을 이어 가게 하는 간편함</h3>
-              <p>복잡한 기능은 기록을 오래가지 못하게 합니다.</p>
-              <div class="vs">
-                <div class="old"><span class="cap">지금까지의 노트</span><ul><li>새 글을 누르고</li><li>제목을 붙이고</li><li>날짜를 적고</li></ul></div>
-                <div class="line"></div>
-                <div class="new"><span class="cap">타닥기록</span><ul><li>열고</li><li>적고</li><li>덮습니다</li></ul></div>
-              </div>
+              <p>복잡한 기능은 기록하는 습관을 오래가지 못하게 합니다. 더 단순하고 간편하게, 기록의 본질에 집중할 수 있게 합니다.</p>
               <p>앱을 열면 바로 입력할 수 있고, 날짜는 자동으로 기록됩니다.</p>
             </div>
             <figure class="shot"><img src="dates.png" alt="쓰기 화면 — 줄마다 옆에 날짜, 쓰는 줄에는 오늘"></figure>
@@ -164,7 +163,7 @@
             <div>
               <span class="no">03</span>
               <h3>수첩을 바꿔 가며 적습니다</h3>
-              <p>일상기록 옆에 올해 목표, 아이디어, 꼭 기억할 일. 새 수첩을 펼치듯 한 번 눌러 바꿉니다.</p>
+              <p>일상기록, 올해 목표, 아이디어, 꼭 기억할 일 등. 원하는 수첩을 만들고, 쉽게 오가며 기록합니다.</p>
             </div>
             <figure class="shot"><img src="gif/03-book.gif" alt="수첩판을 열어 아이디어로 갈아타고, 새 수첩을 만들어 적는다"></figure>
           </div>
@@ -173,22 +172,12 @@
             <div>
               <span class="no">04</span>
               <h3>단어 하나면 그날 그 줄로</h3>
-              <p>찾을 말을 적으면 그 수첩에 적힌 줄만 모입니다. 날짜별로 지난 날을 돌아볼 수도 있습니다.</p>
+              <p>내가 썼던 기록을 쉽게 찾고, 되돌아볼 수 있습니다. 수첩별로 나의 글을 검색하고, 날짜별로 지난 날을 돌아볼 수도 있습니다.</p>
             </div>
             <figure class="shot"><img src="gif/04-seek.gif" alt="색인에 고양이를 적으면 다섯 줄이 모이고, 한 줄을 누르면 그 날로"></figure>
           </div>
         </section>
 
-        <section class="block">
-          <h2>남긴 것만</h2>
-          <div class="points">
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>기능이 많을수록 기록은 오래가지 못합니다. 꼭 필요한 것만 남겼습니다.</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>쓰는 줄은 가려지지도, 움직이지도 않습니다.</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>앱을 열면 바로 쓸 수 있고, 날짜는 자동으로 기록됩니다.</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>쓰고, 나누고, 찾기. 탭 한 번입니다.</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>기록은 내 폰 안에만 저장됩니다. 계정도, 서버도, 광고도 없습니다.</span>
-          </div>
-        </section>
 
         <section class="block">
           <h2>바뀐 것</h2>
@@ -231,10 +220,10 @@
         <div>
           <h3>기록하기</h3>
           <ol>
-            <li>입력하고 싶은 줄을 누르세요. 그 줄이 쓰는 자리로 올라옵니다.</li>
+            <li>입력하고 싶은 곳을 누르세요.</li>
             <li>그대로 입력하세요. 날짜는 자동으로 기록됩니다.</li>
-            <li>그만 쓰고 싶으면 빈 종이를 누르세요. 자판이 내려갑니다.</li>
-            <li>읽기에 집중하고 싶을 땐 아래 열쇠로 쓰기금지 모드로 바꾸세요.</li>
+            <li>그만 쓰고 싶으면 빈 부분을 누르세요.</li>
+            <li>읽기에 집중하고 싶을 땐 「쓰기금지 모드」로 전환하세요.</li>
           </ol>
           <div class="pics">
             <figure><img src="usage/write-1.png" alt="" loading="lazy"><figcaption>입력하고 싶은 줄을 누른다</figcaption></figure>
@@ -289,7 +278,7 @@
   <footer>
     <div class="container">
       <span class="brand">BBUL</span>
-      <a href="mailto:jsilver.kim.p@gmail.com?subject=%5B%ED%83%80%EB%8B%A5%EA%B8%B0%EB%A1%9D%5D%20%EB%AC%B8%EC%9D%98">문의는 메일로 받아요 · jsilver.kim.p@gmail.com</a>
+      <a href="mailto:jsilver.kim.p@gmail.com?subject=%5B%ED%83%80%EB%8B%A5%EA%B8%B0%EB%A1%9D%5D%20%EB%AC%B8%EC%9D%98">앱에 대한 의견이나 건의사항은 이곳으로 보내주세요 · jsilver.kim.p@gmail.com</a>
       <a href="privacy.html">개인정보처리방침</a>
       <span class="r">© BBUL</span>
     </div>
