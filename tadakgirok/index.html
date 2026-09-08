@@ -31,12 +31,15 @@
   .sizebtn[aria-pressed=true]{background:var(--color-action-weak);border-color:transparent;color:var(--color-action-weak-fg)}
   .back{display:inline-flex;align-items:center;gap:var(--gap-inline);min-height:var(--touch-min);font-size:var(--fs-body-sm);font-weight:var(--fw-semibold);color:var(--color-text-muted)}
   .back:hover{text-decoration:none;color:var(--color-text-strong)}
-  /* 머리: 왼쪽 이름·한 줄, 오른쪽에 작은 받기 카드(사용자 결정 2026-09-07 — 받기는 제목 곁에 작게). 좁으면 아래로. */
-  .hero{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:var(--space-11);padding:var(--space-7) 0 0;align-items:start}
-  @media (max-width:820px){.hero{grid-template-columns:1fr;gap:var(--space-8)}}
+  /* 머리: 이름·한 줄. 받기는 카드가 아니라 「한눈에」 위의 목록(사용자 요청 2026-09-08). */
+  .hero{padding:var(--space-7) 0 0;max-width:720px}
+  /* 앱 아이콘을 이름 곁에(2026-09-08). */
+  .title{display:flex;align-items:center;gap:var(--space-5);margin-top:var(--space-5)}
+  .title img{flex:none;width:64px;height:64px;border-radius:16px;box-shadow:var(--inset-media),var(--shadow-1);background:var(--color-media-placeholder)}
+  @media (max-width:480px){.title img{width:52px;height:52px;border-radius:13px}}
   .body{padding-bottom:var(--space-14)}
   .kind{display:block;font-size:var(--fs-caption);line-height:var(--lh-caption);letter-spacing:.12em;color:var(--color-text-muted)}
-  h1{margin-top:var(--space-5);font-weight:var(--fw-bold);font-size:var(--fs-display-2);line-height:var(--lh-display-2);letter-spacing:var(--ls-display-2);color:var(--color-text-strong)}
+  h1{margin:0;font-weight:var(--fw-bold);font-size:var(--fs-display-2);line-height:var(--lh-display-2);letter-spacing:var(--ls-display-2);color:var(--color-text-strong)}
   h1 small{display:block;font-weight:var(--fw-medium);font-size:var(--fs-body-sm);letter-spacing:.2em;color:var(--color-text-muted);margin-top:var(--space-3)}
   .one{margin-top:var(--space-5);font-size:var(--fs-body-lg);line-height:var(--lh-body-lg);letter-spacing:var(--ls-body-lg);color:var(--color-text)}
   .date{display:block;margin-top:var(--space-6);font-size:var(--fs-caption);line-height:var(--lh-caption);color:var(--color-text-muted);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
@@ -54,8 +57,8 @@
   .replay{align-self:center;display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px;border:1px solid var(--color-border-strong);border-radius:var(--radius-button-md);background:transparent;font-size:var(--fs-caption);font-weight:var(--fw-semibold);line-height:1;color:var(--color-text-muted);cursor:pointer;white-space:nowrap}
   .replay:hover{background:var(--color-surface-subtle);color:var(--color-text-strong)}
   .replay::before{content:'';width:12px;height:12px;border:1.5px solid currentColor;border-radius:50%;border-left-color:transparent;box-sizing:border-box}
-  /* 02의 마지막 문장은 인용처럼 — 한 층 크고 진하게, 왼쪽 선. */
-  .quote{margin:var(--space-6) 0 0;padding:var(--space-2) 0 var(--space-2) var(--space-5);border-left:3px solid var(--color-action);font-size:var(--fs-body-lg);line-height:var(--lh-body-lg);letter-spacing:var(--ls-body-lg);font-weight:var(--fw-semibold);color:var(--color-text-strong)}
+  /* 02의 마지막 문장 — 크게 키우지 않고, 옅은 바탕 상자에 본문 크기로 살짝만(사용자 요청 2026-09-08: 큰 인용은 과했다). */
+  .note{margin:var(--space-5) 0 0;padding:var(--space-4) var(--space-5);border-radius:var(--radius-card);background:var(--color-surface-subtle);font-size:var(--fs-body-sm);line-height:var(--lh-body-sm);font-weight:var(--fw-semibold);color:var(--color-text-strong)}
   .feat .no{display:block;font-size:var(--fs-caption);letter-spacing:.22em;color:var(--color-text-muted);font-variant-numeric:tabular-nums}
   .feat h3{margin:var(--space-3) 0 var(--space-4);font-weight:var(--fw-bold);font-size:var(--fs-title-3);line-height:var(--lh-title-3);letter-spacing:var(--ls-title-3);color:var(--color-text-strong)}
   .feat p{font-size:var(--fs-body-sm);line-height:var(--lh-body-sm)}
@@ -79,16 +82,16 @@
   .changes .t{flex:1;min-width:0;display:flex;flex-direction:column;gap:var(--space-1)}
   .changes .t span:first-child{font-size:var(--fs-body-sm);line-height:var(--lh-body-sm)}
   .changes .t span:last-child{font-size:var(--fs-caption);line-height:var(--lh-caption);color:var(--color-text-muted);font-variant-numeric:tabular-nums}
-  .card{padding:var(--space-6) var(--space-7);border:1px solid var(--color-border);border-radius:var(--radius-card);background:var(--color-canvas)}
-  .badge{display:inline-flex;align-items:center;height:28px;padding:0 10px;border-radius:var(--radius-badge);font-size:var(--fs-caption);font-weight:var(--fw-semibold);line-height:1;background:var(--color-success-weak);color:var(--color-success-fg)}
-  .plat{display:flex;flex-direction:column;margin-top:var(--space-4)}
+  /* 받기 — 안드로이드·iOS·데스크탑·브라우저 웹앱, 흔히 쓰는 갈래 그대로 한 줄씩(사용자 요청 2026-09-08). 카드 아니고 목록. */
+  .plat{display:flex;flex-direction:column;max-width:720px;border-top:1px solid var(--color-divider);border-bottom:1px solid var(--color-divider)}
   .plat .row{display:flex;align-items:center;gap:var(--space-4);padding:var(--space-3) 0;border-top:1px solid var(--color-divider)}
   .plat .row:first-child{border-top:0}
-  .plat .row .t{flex:1;min-width:0;display:flex;flex-direction:column}
-  .plat .row .t b{font-weight:var(--fw-semibold);font-size:var(--fs-body-sm);color:var(--color-text-strong)}
-  .plat .row .t span{font-size:var(--fs-caption);line-height:var(--lh-caption);color:var(--color-text-muted)}
+  .plat .row .n{flex:none;width:120px;font-weight:var(--fw-semibold);font-size:var(--fs-body-sm);color:var(--color-text-strong)}
+  .plat .row .t{flex:1;min-width:0;font-size:var(--fs-caption);line-height:var(--lh-caption);color:var(--color-text-muted)}
   .plat .btn{min-width:64px;height:34px;padding:0 12px}
-  .plat .acts{display:flex;flex-direction:column;align-items:stretch;gap:6px;flex:none}
+  .plat .acts{display:flex;align-items:center;justify-content:flex-end;gap:6px;flex:none;flex-wrap:wrap}
+  .plat .q{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border:1.5px solid currentColor;border-radius:50%;font-size:12px;font-weight:var(--fw-bold);line-height:1}
+  @media (max-width:480px){.plat .row{flex-wrap:wrap}.plat .row .n{width:auto}.plat .row .t{flex-basis:100%;order:3}}
   .btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--gap-inline);height:var(--control-h-desktop-md);padding:0 16px;border-radius:var(--radius-button-md);border:1px solid transparent;font-size:var(--fs-button-sm);font-weight:var(--fw-semibold);line-height:1;letter-spacing:var(--ls-button);cursor:pointer;text-decoration:none;white-space:nowrap;transition:var(--transition-control)}
   .btn:hover{text-decoration:none}
   .btn:active{transform:scale(var(--press-scale))}
@@ -99,7 +102,8 @@
   .btn.lg{height:var(--control-h-lg);font-size:var(--fs-button);border-radius:var(--radius-button-lg);width:100%}
   .btn.lg:active{transform:scale(var(--press-scale-large))}
   .btn[aria-disabled=true]{background:var(--color-surface);color:var(--color-text-disabled);cursor:default;pointer-events:none}
-  .ctas{margin-top:var(--space-5)}
+  .ctas{margin-top:var(--space-6)}
+  .ctas .btn{height:var(--control-h-desktop-md)}
   /* 크게 보기 — 그림·GIF를 누르면 화면 가득. 누르거나 Esc로 닫는다. */
   .lb[hidden]{display:none}
   .lb{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:var(--space-6);background:rgba(20,24,31,.86);cursor:zoom-out}
@@ -148,45 +152,54 @@
     </div>
 
     <div class="hero">
-      <div style="min-width:0">
-        <span class="kind">모바일 · 웹 앱</span>
+      <span class="kind">모바일 · 웹 앱</span>
+      <div class="title">
+        <img src="icon-192.png" width="64" height="64" alt="">
         <h1>타닥기록<small>TYPEJOTTER</small></h1>
-        <p class="one">기계식 타자기의 감성을 담은, 「쓰기」에 집중할 수 있는 간결한 기록앱.</p>
-        <span class="date" id="dateLabel"></span>
       </div>
-      <aside class="card">
-        <span class="badge">사용 가능</span>
-        <div class="plat">
-          <div class="row">
-            <span class="t"><b>안드로이드 휴대폰 · 태블릿</b><span>앱을 설치해서 씁니다</span></span>
-            <a class="btn weak" href="https://play.google.com/store/apps/details?id=com.actioners.tadakgirok" rel="noopener">받기</a>
-          </div>
-          <div class="row">
-            <span class="t"><b>웹 브라우저</b><span>설치 없이 지금 바로 · 홈 화면에 추가하면 앱처럼</span></span>
-            <span class="acts">
-              <a class="btn weak" href="https://ajournal.pages.dev/" rel="noopener">열기</a>
-              <a class="btn outline" href="/webapp/?app=https%3A%2F%2Fajournal.pages.dev%2F&amp;name=%ED%83%80%EB%8B%A5%EA%B8%B0%EB%A1%9D" title="홈 화면에 추가해 앱처럼 쓰는 법">앱처럼 쓰기</a>
-            </span>
-          </div>
-          <div class="row">
-            <span class="t"><b>아이폰 · 아이패드</b><span>준비하고 있어요</span></span>
-            <span class="btn weak" aria-disabled="true">준비 중</span>
-          </div>
-        </div>
-        <div class="ctas"><a class="btn outline lg" href="#usage">쓰는 법 보기</a></div>
-      </aside>
+      <p class="one">기계식 타자기의 감성을 담은, 「쓰기」에 집중할 수 있는 간결한 기록앱.</p>
+      <span class="date" id="dateLabel"></span>
+      <div class="ctas"><a class="btn outline" href="#usage">쓰는 법 보기</a></div>
     </div>
 
     <div class="body">
       <div style="min-width:0">
+        <section class="block">
+          <h2>받기</h2>
+          <div class="plat">
+            <div class="row">
+              <span class="n">안드로이드</span>
+              <span class="t">휴대폰 · 태블릿. 앱을 설치해서 씁니다</span>
+              <span class="acts"><a class="btn weak" href="https://play.google.com/store/apps/details?id=com.actioners.tadakgirok" rel="noopener">받기</a></span>
+            </div>
+            <div class="row">
+              <span class="n">iOS</span>
+              <span class="t">아이폰 · 아이패드</span>
+              <span class="acts"><span class="btn weak" aria-disabled="true">준비 중</span></span>
+            </div>
+            <div class="row">
+              <span class="n">데스크탑</span>
+              <span class="t">윈도우 · 맥. 지금은 브라우저 웹앱으로 쓸 수 있습니다</span>
+              <span class="acts"><span class="btn weak" aria-disabled="true">준비 중</span></span>
+            </div>
+            <div class="row">
+              <span class="n">브라우저 웹앱</span>
+              <span class="t">설치 없이 지금 바로. 홈 화면에 추가하면 앱처럼</span>
+              <span class="acts">
+                <a class="btn weak" href="https://ajournal.pages.dev/" rel="noopener">열기</a>
+                <a class="btn outline" href="/webapp/?app=https%3A%2F%2Fajournal.pages.dev%2F&amp;name=%ED%83%80%EB%8B%A5%EA%B8%B0%EB%A1%9D" title="홈 화면에 추가해 앱처럼 쓰는 법"><span class="q">?</span>웹앱 추가하는 법</a>
+              </span>
+            </div>
+          </div>
+        </section>
+
         <section class="block">
           <h2>한눈에</h2>
           <div class="points">
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>기계식 타자기의 감성과, 움직이거나 가려지지 않는 입력 자리로 「쓰기」 자체에 집중하게 합니다.</span>
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>복잡한 기능 대신 간결함과 쉬운 사용으로 「기록」을 습관처럼 이어 가게 합니다.</span>
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>앱을 열면 바로 기록할 수 있고, 날짜는 자동으로 함께 남습니다.</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>쉽게 원하는 수첩을 만들고 나눠서 기록할 수 있습니다.</span>
-            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>수첩별로 기록을 검색하고, 날짜별로 확인할 수 있습니다.</span>
+            <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>수첩별로 내용을 나눠서 기록하고 찾을 수 있습니다.</span>
             <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>기록은 내 기기 안에만 저장되어, 외부로 공유되지 않습니다.</span>
           </div>
         </section>
@@ -208,7 +221,7 @@
               <span class="no">02</span>
               <h3>기록을 이어 가게 하는 간편함</h3>
               <p>복잡한 기능은 기록하는 습관을 오래가지 못하게 합니다. 더 단순하고 간편하게, 기록의 본질에 집중할 수 있게 합니다.</p>
-              <blockquote class="quote">앱을 열면 바로 입력할 수 있고,<br>날짜는 자동으로 기록됩니다.</blockquote>
+              <p class="note">앱을 열면 바로 입력할 수 있고, 날짜는 자동으로 기록됩니다.</p>
             </div>
             <!-- 소개 덱 02의 대비(지금까지의 노트 / 타닥기록)와 반 잘린 쓰기 화면 — analogtypo/store/deck/compare.html에서 굽는다(compare-shot.mjs). -->
             <figure class="shot wide"><img class="zoom" src="compare.png" alt="지금까지의 노트는 새 글을 누르고 제목을 붙이고 날짜를 적지만, 타닥기록은 열고 적고 덮습니다 — 아래는 줄마다 날짜가 남은 쓰기 화면"></figure>
@@ -263,7 +276,7 @@
           </div>
         </div>
         <div>
-          <h3>수첩 나누기</h3>
+          <h3>수첩별로 기록하기</h3>
           <ol>
             <li>일상, 목표, 아이디어처럼 수첩을 나눠 적을 수 있습니다.</li>
             <li>하단의 수첩 아이콘을 누르면 수첩판이 펼쳐집니다.</li>
@@ -279,6 +292,7 @@
         <div>
           <h3>찾기</h3>
           <ol>
+            <li>현재 선택한 수첩의 기록을 찾을 수 있습니다.</li>
             <li>하단의 돋보기 아이콘을 누르고 찾을 말을 적으세요.</li>
             <li>그 말이 적힌 줄이 날짜와 함께 모입니다.</li>
             <li>한 줄을 누르면 그 날 그 줄로 갑니다.</li>
@@ -290,7 +304,7 @@
           </div>
         </div>
         <div>
-          <h3>나에게 맞게 설정하기</h3>
+          <h3>글씨체 · 종이 변경하기</h3>
           <p class="lead">원하는 글씨체, 종이 색, 형태 등을 고를 수 있습니다.</p>
           <ol>
             <li>하단의 설정 아이콘을 누르세요. 설정판이 펼쳐집니다.</li>
