@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>홈 화면에 추가해 앱처럼 쓰기 — BBUL</title>
+<meta name="description" content="웹 브라우저로 여는 BBUL 앱을 휴대폰 홈 화면에 추가해 앱처럼 쓰는 법. 안드로이드 크롬·삼성 인터넷, 아이폰 사파리.">
+<link rel="stylesheet" href="/bbul.css">
+<!-- 공용 안내 — 제품마다 이 페이지 하나를 쓴다. 주소로 앱을 받는다: /webapp/?app=<앱 주소>&name=<앱 이름>
+     (없으면 일반 안내). 배치·토큰은 제품 페이지와 같다(/bbul.css). 2026-09-08 사용자 요청. -->
+<style>
+  .wrap{min-height:100vh;display:flex;flex-direction:column;background:var(--color-canvas);color:var(--color-text);font-size:var(--fs-body);line-height:var(--lh-body);letter-spacing:var(--ls-body);text-wrap:pretty;word-break:keep-all}
+  .container{max-width:720px;margin:0 auto;padding:0 var(--pad-screen);width:100%}
+  header.top{position:sticky;top:0;z-index:5;background:var(--color-canvas);border-bottom:1px solid var(--color-border)}
+  header.top .container{min-height:72px;display:flex;align-items:center;gap:24px}
+  .brand{font-weight:var(--fw-heavy);font-size:17px;line-height:1;letter-spacing:.24em;color:var(--color-text-strong);text-decoration:none}
+  .back{margin-left:auto;display:inline-flex;align-items:center;gap:var(--gap-inline);min-height:var(--touch-min);font-size:var(--fs-body-sm);font-weight:var(--fw-semibold);color:var(--color-text-muted)}
+  .back:hover{text-decoration:none;color:var(--color-text-strong)}
+  main{flex:1;padding:var(--space-9) 0 var(--space-14)}
+  .kind{display:block;font-size:var(--fs-caption);line-height:var(--lh-caption);letter-spacing:.12em;color:var(--color-text-muted)}
+  h1{margin:var(--space-4) 0 0;font-weight:var(--fw-bold);font-size:var(--fs-title-2);line-height:var(--lh-title-2);letter-spacing:var(--ls-title-2);color:var(--color-text-strong)}
+  .intro{margin-top:var(--space-5);font-size:var(--fs-body-lg);line-height:var(--lh-body-lg);color:var(--color-text)}
+  .open{display:inline-flex;align-items:center;gap:var(--gap-inline);margin-top:var(--space-6);height:var(--control-h-desktop-md);padding:0 16px;border-radius:var(--radius-button-md);background:var(--color-action-weak);color:var(--color-action-weak-fg);font-size:var(--fs-button-sm);font-weight:var(--fw-semibold);line-height:1;text-decoration:none}
+  .open:hover{background:var(--color-action-weak-hover);text-decoration:none}
+  .open[hidden]{display:none}
+  section{margin-top:var(--space-10);padding-top:var(--space-8);border-top:1px solid var(--color-divider)}
+  h2{margin:0;font-weight:var(--fw-bold);font-size:var(--fs-title-3);line-height:var(--lh-title-3);letter-spacing:var(--ls-title-3);color:var(--color-text-strong)}
+  h2 small{display:block;margin-top:var(--space-2);font-weight:var(--fw-regular);font-size:var(--fs-caption);letter-spacing:0;color:var(--color-text-muted)}
+  ol{margin:var(--space-5) 0 0;padding-left:1.3em;display:flex;flex-direction:column;gap:var(--space-3);font-size:var(--fs-body);line-height:var(--lh-body)}
+  .note{margin-top:var(--space-5);padding:var(--space-5) var(--space-6);border-radius:var(--radius-card);background:var(--color-surface-subtle);font-size:var(--fs-body-sm);line-height:var(--lh-body-sm);color:var(--color-text-muted)}
+  .after{margin-top:var(--space-10);padding:var(--space-6) var(--space-7);border:1px solid var(--color-border);border-radius:var(--radius-card)}
+  .after h2{font-size:var(--fs-body);margin-bottom:var(--space-3)}
+  .after p{font-size:var(--fs-body-sm);line-height:var(--lh-body-sm);color:var(--color-text)}
+  .after p+p{margin-top:var(--space-3)}
+  footer{border-top:1px solid var(--color-border);background:var(--color-surface-subtle)}
+  footer .container{padding:var(--space-9) var(--pad-screen);display:flex;flex-wrap:wrap;align-items:baseline;gap:var(--space-8)}
+  footer .brand{font-size:15px}
+  footer span{font-size:var(--fs-caption);color:var(--color-text-muted)}
+  footer .r{margin-left:auto}
+  b{font-weight:var(--fw-semibold);color:var(--color-text-strong)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="container">
+      <a class="brand" href="/">BBUL</a>
+      <a class="back" id="backLink" href="/">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+        <span id="backText">돌아가기</span>
+      </a>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <span class="kind">웹 앱</span>
+      <h1 id="title">홈 화면에 추가해 앱처럼 쓰기</h1>
+      <p class="intro">웹 브라우저로 여는 앱은 설치 없이 바로 쓸 수 있습니다. 홈 화면에 추가해 두면 다른 앱처럼 아이콘을 눌러 열리고, 브라우저의 주소창 없이 화면을 온전히 씁니다.</p>
+      <a class="open" id="openApp" hidden rel="noopener">앱 열기</a>
+
+      <section>
+        <h2>안드로이드 · 크롬<small>삼성·LG 등 안드로이드 휴대폰과 태블릿</small></h2>
+        <ol>
+          <li>크롬에서 앱을 엽니다.</li>
+          <li>오른쪽 위 점 세 개 메뉴를 누릅니다.</li>
+          <li><b>「홈 화면에 추가」</b> 또는 <b>「앱 설치」</b>를 고릅니다.</li>
+          <li>이름을 확인하고 <b>「추가」</b>를 누르면 홈 화면에 아이콘이 생깁니다.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>안드로이드 · 삼성 인터넷<small>갤럭시의 기본 브라우저</small></h2>
+        <ol>
+          <li>삼성 인터넷에서 앱을 엽니다.</li>
+          <li>아래 줄 세 개 메뉴를 누릅니다.</li>
+          <li><b>「현재 페이지 추가」</b>를 누르고 <b>「홈 화면」</b>을 고릅니다.</li>
+          <li><b>「추가」</b>를 누르면 홈 화면에 아이콘이 생깁니다.</li>
+        </ol>
+      </section>
+
+      <section>
+        <h2>아이폰 · 아이패드 · 사파리<small>애플 휴대폰과 태블릿</small></h2>
+        <ol>
+          <li>사파리에서 앱을 엽니다.</li>
+          <li>아래 가운데 <b>공유</b> 단추(네모에서 화살표가 위로 나가는 모양)를 누릅니다.</li>
+          <li>목록을 내려 <b>「홈 화면에 추가」</b>를 고릅니다.</li>
+          <li>오른쪽 위 <b>「추가」</b>를 누르면 홈 화면에 아이콘이 생깁니다.</li>
+        </ol>
+        <p class="note">아이폰의 크롬에서도 같은 공유 단추로 「홈 화면에 추가」할 수 있습니다.</p>
+      </section>
+
+      <div class="after">
+        <h2>추가한 뒤에는</h2>
+        <p>홈 화면의 아이콘으로 열면 앱처럼 전체 화면으로 열립니다. 인터넷이 없어도 열리고, 새 판이 나오면 앱 안에서 알려 줍니다.</p>
+        <p>기록은 그 브라우저 안에만 저장됩니다. 브라우저의 사이트 데이터를 지우면 기록도 함께 지워지니, 지우기 전에 확인하세요.</p>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <span class="brand">BBUL</span>
+      <span>이 안내는 BBUL의 웹 앱에 함께 씁니다.</span>
+      <span class="r">© BBUL</span>
+    </div>
+  </footer>
+</div>
+<script>
+  (function(){
+    var q=new URLSearchParams(location.search), app=q.get('app'), name=q.get('name');
+    if(app&&/^https:\/\//.test(app)){var a=document.getElementById('openApp');a.href=app;a.hidden=false;if(name)a.textContent=name+' 열기';}
+    if(name){document.getElementById('title').textContent=name+' — 홈 화면에 추가해 앱처럼 쓰기';document.title=name+' — 홈 화면에 추가해 앱처럼 쓰기';}
+    if(document.referrer&&new URL(document.referrer).origin===location.origin){var b=document.getElementById('backLink');b.href=document.referrer;document.getElementById('backText').textContent=name?name+' 제품 페이지':'돌아가기';}
+  })();
+</script>
+</body>
+</html>
