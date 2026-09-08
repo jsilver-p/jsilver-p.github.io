@@ -12,7 +12,7 @@
 <link rel="stylesheet" href="bbul.css">
 <!-- 배치는 claude.ai/design 프로젝트 338588cc의 「BBUL 제품 상세 페이지.dc.html」, 문안은 프로젝트 bbd00e84의
      「JournalIntro v3.dc.html」(소개 덱 01~04)을 그대로 따른다. 같은 문안이 analogtypo/store/listing.md(스토어)와
-     store/deck/usage.md(사용법)에 있다 — 셋 중 하나를 고치면 나머지도 맞춘다.
+     store/deck/usage.md(쓰는 법)에 있다 — 셋 중 하나를 고치면 나머지도 맞춘다.
      DS 컴포넌트(Button·Card·Badge·Icon·TextSizeToggle)는 같은 토큰으로 여기서 직접 그린다.
      주소 셋의 출처: analogtypo/scripts/config.mjs(PLAY_URL·ORIGIN·CONTACT). -->
 <style>
@@ -39,7 +39,7 @@
   h1{margin-top:var(--space-5);font-weight:var(--fw-bold);font-size:var(--fs-display-2);line-height:var(--lh-display-2);letter-spacing:var(--ls-display-2);color:var(--color-text-strong)}
   h1 small{display:block;font-weight:var(--fw-medium);font-size:var(--fs-body-sm);letter-spacing:.2em;color:var(--color-text-muted);margin-top:var(--space-3)}
   .one{margin-top:var(--space-5);font-size:var(--fs-body-lg);line-height:var(--lh-body-lg);letter-spacing:var(--ls-body-lg);color:var(--color-text)}
-  .date{display:block;margin-top:var(--space-6);font-size:var(--fs-caption);line-height:var(--lh-caption);color:var(--color-text-muted);font-variant-numeric:tabular-nums}
+  .date{display:block;margin-top:var(--space-6);font-size:var(--fs-caption);line-height:var(--lh-caption);color:var(--color-text-muted);font-variant-numeric:tabular-nums;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
   h2{margin:0 0 var(--space-6);font-weight:var(--fw-bold);font-size:var(--fs-title-3);line-height:var(--lh-title-3);letter-spacing:var(--ls-title-3);color:var(--color-text-strong)}
   section.block{margin-top:var(--gap-block)}
   .points{max-width:720px}
@@ -56,6 +56,9 @@
   .feat p+p{margin-top:var(--space-4)}
   .shot{aspect-ratio:471/1019;border-radius:var(--radius-image-lg);overflow:hidden;background:var(--color-media-placeholder);box-shadow:var(--inset-media),var(--shadow-media)}
   .shot img{width:100%;height:100%;object-fit:cover;object-position:top}
+  /* 02는 대비표+반 잘린 폰이라 넓다 — 글 아래 전체 폭(폰 열 168px에선 안 읽힌다). */
+  .feat.stack{grid-template-columns:1fr}
+  .shot.wide{aspect-ratio:1000/760;border-radius:var(--radius-image);max-width:560px}
   @media (max-width:480px){.feat{grid-template-columns:minmax(0,1fr) 128px;gap:var(--space-5)}}
   .points{display:flex;flex-direction:column;gap:var(--gap-default)}
   .points span{display:flex;align-items:flex-start;gap:var(--gap-inline);font-size:var(--fs-body-sm);line-height:var(--lh-body-sm)}
@@ -85,8 +88,7 @@
   .btn.lg{height:var(--control-h-lg);font-size:var(--fs-button);border-radius:var(--radius-button-lg);width:100%}
   .btn.lg:active{transform:scale(var(--press-scale-large))}
   .btn[aria-disabled=true]{background:var(--color-surface);color:var(--color-text-disabled);cursor:default;pointer-events:none}
-  .more{display:inline-flex;align-items:center;margin-top:var(--space-4);font-size:var(--fs-body-sm);font-weight:var(--fw-semibold);color:var(--color-action)}
-  .changes .empty{font-size:var(--fs-body-sm);line-height:var(--lh-body-sm);color:var(--color-text-muted)}
+  .ctas{margin-top:var(--space-5)}
   /* 크게 보기 — 그림·GIF를 누르면 화면 가득. 누르거나 Esc로 닫는다. */
   .lb[hidden]{display:none}
   .lb{position:fixed;inset:0;z-index:20;display:flex;align-items:center;justify-content:center;padding:var(--space-6);background:rgba(20,24,31,.86);cursor:zoom-out}
@@ -115,7 +117,7 @@
       <a class="brand" href="/" style="text-decoration:none">BBUL</a>
       <nav>
         <a href="#" aria-current="page">제품</a>
-        <a href="#usage">사용법 자세하게</a>
+        <a href="#usage">쓰는 법</a>
         <a href="mailto:jsilver.kim.p@gmail.com?subject=%5B%ED%83%80%EB%8B%A5%EA%B8%B0%EB%A1%9D%5D%20%EB%AC%B8%EC%9D%98">문의</a>
         <button class="sizebtn" id="sizeToggle" type="button" aria-pressed="false" title="큰 글씨 모드">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
@@ -138,7 +140,7 @@
         <span class="kind">모바일 앱</span>
         <h1>타닥기록<small>TYPEJOTTER</small></h1>
         <p class="one">기계식 타자기의 감성을 담은, 「쓰기」에 집중할 수 있는 간결한 기록앱.</p>
-        <span class="date" id="dateLabel">최신 버전 1.2.0 · 2026.09.07 업데이트</span>
+        <span class="date" id="dateLabel"></span>
       </div>
       <aside class="card">
         <span class="badge">사용 가능</span>
@@ -156,7 +158,7 @@
             <span class="btn weak" aria-disabled="true">준비 중</span>
           </div>
         </div>
-        <a class="more" href="#usage">사용법 자세하게</a>
+        <div class="ctas"><a class="btn outline lg" href="#usage">쓰는 법</a></div>
       </aside>
     </div>
 
@@ -185,14 +187,15 @@
             <figure class="shot"><img class="zoom" src="gif/01-lines.gif" alt="네 줄을 치는 동안 쓰는 줄은 그 자리에 있고 종이가 올라간다"></figure>
           </div>
 
-          <div class="feat">
+          <div class="feat stack">
             <div>
               <span class="no">02</span>
               <h3>기록을 이어 가게 하는 간편함</h3>
               <p>복잡한 기능은 기록하는 습관을 오래가지 못하게 합니다. 더 단순하고 간편하게, 기록의 본질에 집중할 수 있게 합니다.</p>
               <p>앱을 열면 바로 입력할 수 있고, 날짜는 자동으로 기록됩니다.</p>
             </div>
-            <figure class="shot"><img class="zoom" src="dates.png" alt="쓰기 화면 — 줄마다 옆에 날짜, 쓰는 줄에는 오늘"></figure>
+            <!-- 소개 덱 02의 대비(지금까지의 노트 / 타닥기록)와 반 잘린 쓰기 화면 — analogtypo/store/deck/compare.html에서 굽는다(compare-shot.mjs). -->
+            <figure class="shot wide"><img class="zoom" src="compare.png" alt="지금까지의 노트는 새 글을 누르고 제목을 붙이고 날짜를 적지만, 타닥기록은 열고 적고 덮습니다 — 아래는 줄마다 날짜가 남은 쓰기 화면"></figure>
           </div>
 
           <div class="feat">
@@ -217,17 +220,17 @@
 
 
         <section class="block">
-          <h2>바뀐 것</h2>
-          <!-- 첫 줄은 플레이 스토어 첫 판과 함께 적는다(사용자 결정 2026-09-07). 줄 모양: .row > .v(버전) + .t(내용, 날짜) -->
-          <div class="changes" id="changes">
-            <p class="empty">첫 판을 내면 여기에 적습니다.</p>
-          </div>
+          <h2>최근 소식</h2>
+          <!-- 소식은 아래 <script>의 NEWS 하나가 출처다(최신이 앞). 세 줄까지 보이고, 「전체 업데이트 내역 보기」로 펼친다.
+               머리의 「최신 버전 …」 줄도 NEWS[0]에서 나온다 — 두 곳을 따로 고치지 않는다(사용자 요청 2026-09-08). -->
+          <div class="changes" id="changes"></div>
+          <button class="btn outline" id="newsAll" type="button" aria-expanded="false" style="margin-top:var(--space-6)">전체 업데이트 내역 보기</button>
         </section>
       </div>
     </div>
 
     <section id="usage">
-      <h2 class="big">사용법 자세하게</h2>
+      <h2 class="big">쓰는 법</h2>
       <p style="font-size:var(--fs-body);line-height:var(--lh-body);max-width:640px">그림의 동그라미가 누르는 자리입니다. 아래 열쇠 넷(수첩·색인·진동·설정)과 읽기/쓰기 열쇠가 전부입니다.</p>
       <div class="how">
         <div>
@@ -315,10 +318,23 @@
     lb.addEventListener('click',close);
     document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!lb.hidden)close()});
   })();
-  fetch('https://ajournal.pages.dev/version.json',{cache:'no-store'}).then(function(r){return r.json()}).then(function(v){
-    var d=(v.build||'').slice(0,10).replace(/-/g,'.');
-    if(v.version) document.getElementById('dateLabel').textContent='최신 버전 '+v.version+(d?' · '+d+' 업데이트':'');
-  }).catch(function(){});
+  /* 소식 — 최신이 앞. 새 판을 내면 맨 앞에 한 줄 더한다. {v:버전, d:날짜, t:한 줄} */
+  var NEWS=[
+    {v:'1.0.0',d:'2026.09.08',t:'구글플레이스토어 릴리즈'}
+  ];
+  (function(){
+    var box=document.getElementById('changes'), btn=document.getElementById('newsAll'), SHOW=3, all=false;
+    function esc(x){return String(x).replace(/[&<>]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]})}
+    function render(){
+      var list=all?NEWS:NEWS.slice(0,SHOW);
+      box.innerHTML=list.map(function(n){return '<div class="row"><span class="v">'+esc(n.v)+'</span><span class="t"><span>'+esc(n.t)+'</span><span>'+esc(n.d)+'</span></span></div>'}).join('');
+      btn.textContent=all?'접기':'전체 업데이트 내역 보기';
+      btn.setAttribute('aria-expanded',String(all));
+    }
+    btn.addEventListener('click',function(){all=!all;render()});
+    render();
+    var n=NEWS[0]; if(n) document.getElementById('dateLabel').textContent='최신 버전 '+n.v+' · '+n.d+' · '+n.t;
+  })();
 </script>
 </body>
 </html>
