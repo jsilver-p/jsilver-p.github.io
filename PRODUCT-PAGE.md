@@ -9,7 +9,7 @@
 /bbul.css                 공용 토큰·리셋 — 모든 페이지가 이걸 링크한다 (`<link rel="stylesheet" href="/bbul.css">`)
 /webapp/index.html        공용 「홈 화면에 추가해 앱처럼 쓰기」 안내 — 제품 페이지가 `?name=<이름>`(웹앱이 열려 있으면 `&app=<https 주소>`)로 부른다
 /<제품>/index.html         제품 페이지 (한 파일, 스타일·스크립트 인라인)
-/<제품>/privacy.html       개인정보처리방침
+/<제품>/privacy/index.html   개인정보처리방침 (영어는 privacy/en/ — URL 규칙: 끝에 /en)
 /<제품>/icon-192.png, icon-512.png   앱 아이콘 (192는 머리·파비콘, 512는 og:image)
 /<제품>/gif/               소개 절의 움직이는 화면 (390×844 폰 화면, 01·03·04처럼 절 번호로)
 /<제품>/compare.png        02의 대비 그림 (있을 때)
@@ -63,17 +63,41 @@
 
 ## 5. 개인정보처리방침
 
-`tadakgirok/privacy.html`을 복사해 제품 이름·시행일·네트워크 사용을 **실제 코드로 확인해** 고친다.
+`tadakgirok/privacy/index.html`을 복사해 제품 이름·시행일·네트워크 사용을 **실제 코드로 확인해** 고친다.
 (타닥기록: 안드로이드 앱은 서체를 포함한 모든 자원을 내장하고, 인터넷은 「업데이트 확인」을 누를 때 version.json 한 번뿐.
 배포 서버는 Cloudflare Pages — 전 세계 분산 CDN.) 방침을 바꾸면 시행일도 바꾼다.
 
-## 6. 새 제품 체크리스트
+## 6. 영어 페이지 (2026-09-09, 타닥기록 → TypeJotter)
+
+```
+/<제품>/en/index.html        영어 제품 페이지 — ko 페이지의 <style>을 그대로 복사(한 파일 규칙), en만 끝에 덧붙인 규칙 몇 줄
+/<제품>/privacy/en/index.html   영어 방침 — 같은 정책·같은 시행일의 번역
+/<제품>/en/gif/ usage/ compare.png   영어 그림(앱 저장소의 en 굽기: store/deck/gif/en·usage/en, compare-shot.mjs --lang en). 아이콘은 ../icon-*.png 공유
+/webapp/en/index.html        공용 웹앱 안내의 영어 판 — en 받기 줄의 「How to add a web app」이 /webapp/en/?name=<영문 이름>으로 부른다
+```
+
+- **언어 링크**는 「← 제품 전체 / All products」 줄(`.backrow`) 오른쪽에 「English」/「한국어」. nav에 넣으면 360px(폴드 겉화면)에서 ko도 넘친다(실측).
+  `<head>`에 `hreflang` alternate 두 줄(ko·en), 방침·웹앱 안내도 같다. 방침은 머리 줄 오른쪽에 언어 링크.
+- **URL 규칙: 어느 페이지든 끝에 `/en`을 붙이면 영어**(사용자 2026-09-09) — `<제품>/` → `<제품>/en/`, `<제품>/privacy/` → `<제품>/privacy/en/`, `/webapp/` → `/webapp/en/`.
+  그래서 방침은 파일이 아니라 폴더다. 옛 `privacy.html`은 `privacy/`로 넘기는 stub(플레이 콘솔에 등록된 주소).
+- **콘솔의 웹사이트·방침 주소는 하나(ko 페이지)** — 그래서 `<제품>/index.html`과 `<제품>/privacy/index.html` 머리의 스크립트가 브라우저 언어가 ko가 아니면
+  `en/`으로 보낸다. 영어 페이지의 「한국어」 링크는 `../?lang=ko`(머문다), `/en/`에서 돌아와도 머문다. 되튕김 없음을 사이트 저장소 밖 검사로 잰다(analogtypo `scripts/en-review.mjs` §7).
+- **영어 nav는 ≤480px에서** 현재 페이지 링크(`aria-current`)를 감추고 큰 글씨 단추는 아이콘만(`aria-label` 유지) — Product·How to use·Contact·[Large text]가
+  406px, 360px 폰의 자리는 324px. 「Coming soon」은 준비 중보다 넓어 `.plat .btn.weak{width:100px}`.
+- **문안의 출처**: 01~04와 한눈에는 앱 저장소 `store/listing.md`의 en-US 절(■ 네 절·첫 목록), 쓰는 법은 `store/deck/usage.md`의 en 절. 앱 화면 이름은
+  `src/core/strings.js`의 en 표기(Notebooks·Index·“Past days”·Haptics)를 따른다. 홑낫표 대신 영어 따옴표 “ ”.
+- **NEWS는 페이지마다** — 새 판을 내면 ko·en 두 페이지에 한 줄씩. 머리의 「Latest version」 줄도 거기서 나온다.
+- 플레이 콘솔의 개인정보처리방침 URL은 하나 — ko 방침을 두고 그 머리의 「English」로 잇는다.
+- ko 페이지의 CSS를 고치면 en 페이지의 `<style>`도 다시 복사한다(파일 머리 주석).
+
+## 7. 새 제품 체크리스트
 
 > 이 문서 자체도 페이지가 바뀔 때 같이 고친다 — 페이지와 문서가 어긋나면 다음 제품이 옛 규칙을 따른다.
 
-1. `/<제품>/` 폴더에 index.html·privacy.html·아이콘·gif·usage·compare 복사/생성
+1. `/<제품>/` 폴더에 index.html·privacy/index.html·아이콘·gif·usage·compare 복사/생성
 2. index.html: `<title>`·설명·og 태그, `.kind`, 이름·영문, 한 줄, 받기 주소(Play·웹앱), NEWS 첫 줄, 01~04 문안, 쓰는 법, 메일 주소
 3. 받기 갈래별 상태(받기 / 열기 / 준비 중) 확인, 준비 중과 어긋나는 설명 없는지
 4. 데스크톱·모바일 스크린샷으로 배치 확인(라이트박스·다시 보기·사용하기 펼침 포함)
 5. 루트 `index.html` 제품 목록에 링크 추가
-6. main에 커밋·푸시
+6. 영어 페이지가 있으면 `/<제품>/en/`·`/webapp/en/`도 §6대로, ko 페이지에 언어 링크·hreflang
+7. main에 커밋·푸시

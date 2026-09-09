@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>홈 화면에 추가해 앱처럼 쓰기 — BBUL</title>
-<meta name="description" content="웹 브라우저로 여는 BBUL 앱을 휴대폰 홈 화면에 추가해 앱처럼 쓰는 법. 안드로이드 크롬·삼성 인터넷, 아이폰 사파리.">
+<title>Add to your home screen and use it like an app — BBUL</title>
+<meta name="description" content="How to add a BBUL web app to your phone's home screen so it opens like an app. Android Chrome and Samsung Internet, iPhone Safari.">
 <link rel="alternate" hreflang="ko" href="https://jsilver-p.github.io/webapp/">
 <link rel="alternate" hreflang="en" href="https://jsilver-p.github.io/webapp/en/">
 <link rel="stylesheet" href="/bbul.css">
-<!-- 공용 안내 — 제품마다 이 페이지 하나를 쓴다. 주소로 앱을 받는다: /webapp/?app=<앱 주소>&name=<앱 이름>
-     (없으면 일반 안내). 배치·토큰은 제품 페이지와 같다(/bbul.css). 2026-09-08 사용자 요청. -->
+<!-- English twin of ../index.html (2026-09-09) — shared by every BBUL web app. The product page passes the app in the URL:
+     /webapp/en/?app=<app url>&name=<app name> (without them, the general guide). Same <style> block as the Korean page, copied verbatim. -->
 <style>
   .wrap{min-height:100vh;display:flex;flex-direction:column;background:var(--color-canvas);color:var(--color-text);font-size:var(--fs-body);line-height:var(--lh-body);letter-spacing:var(--ls-body);text-wrap:pretty;word-break:keep-all}
   .container{max-width:720px;margin:0 auto;padding:0 var(--pad-screen);width:100%}
@@ -49,53 +49,53 @@
       <a class="brand" href="/">BBUL</a>
       <a class="back" id="backLink" href="/">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-        <span id="backText">돌아가기</span>
+        <span id="backText">Back</span>
       </a>
     </div>
   </header>
 
   <main>
     <div class="container">
-      <span class="kind">웹앱</span>
-      <h1 id="title">홈 화면에 추가해 앱처럼 쓰기</h1>
-      <p class="intro">웹 브라우저로 여는 앱은 설치 없이 바로 쓸 수 있습니다. 홈 화면에 추가해 두면 다른 앱처럼 아이콘을 눌러 열리고, 브라우저의 주소창 없이 화면을 온전히 씁니다.</p>
-      <a class="open" id="openApp" hidden rel="noopener">앱 열기</a>
+      <span class="kind">Web app</span>
+      <h1 id="title">Add to your home screen and use it like an app</h1>
+      <p class="intro">An app that opens in the browser needs no install. Add it to your home screen and it opens from an icon like any other app, using the whole screen with no address bar.</p>
+      <a class="open" id="openApp" hidden rel="noopener">Open the app</a>
 
       <section>
-        <h2>안드로이드 · 크롬<small>삼성·LG 등 안드로이드 휴대폰과 태블릿</small></h2>
+        <h2>Android · Chrome<small>Samsung, Pixel and other Android phones and tablets</small></h2>
         <ol>
-          <li>크롬에서 앱을 엽니다.</li>
-          <li>오른쪽 위 점 세 개 메뉴를 누릅니다.</li>
-          <li><b>「홈 화면에 추가」</b> 또는 <b>「앱 설치」</b>를 고릅니다.</li>
-          <li>이름을 확인하고 <b>「추가」</b>를 누르면 홈 화면에 아이콘이 생깁니다.</li>
+          <li>Open the app in Chrome.</li>
+          <li>Tap the three-dot menu at the top right.</li>
+          <li>Choose <b>“Add to Home screen”</b> or <b>“Install app”</b>.</li>
+          <li>Check the name and tap <b>“Add”</b>. The icon appears on your home screen.</li>
         </ol>
       </section>
 
       <section>
-        <h2>안드로이드 · 삼성 인터넷<small>갤럭시의 기본 브라우저</small></h2>
+        <h2>Android · Samsung Internet<small>The default browser on Galaxy phones</small></h2>
         <ol>
-          <li>삼성 인터넷에서 앱을 엽니다.</li>
-          <li>아래 줄 세 개 메뉴를 누릅니다.</li>
-          <li><b>「현재 페이지 추가」</b>를 누르고 <b>「홈 화면」</b>을 고릅니다.</li>
-          <li><b>「추가」</b>를 누르면 홈 화면에 아이콘이 생깁니다.</li>
+          <li>Open the app in Samsung Internet.</li>
+          <li>Tap the three-line menu at the bottom.</li>
+          <li>Tap <b>“Add page to”</b> and choose <b>“Home screen”</b>.</li>
+          <li>Tap <b>“Add”</b>. The icon appears on your home screen.</li>
         </ol>
       </section>
 
       <section>
-        <h2>아이폰 · 아이패드 · 사파리<small>애플 휴대폰과 태블릿</small></h2>
+        <h2>iPhone · iPad · Safari<small>Apple phones and tablets</small></h2>
         <ol>
-          <li>사파리에서 앱을 엽니다.</li>
-          <li>아래 가운데 <b>공유</b> 단추(네모에서 화살표가 위로 나가는 모양)를 누릅니다.</li>
-          <li>목록을 내려 <b>「홈 화면에 추가」</b>를 고릅니다.</li>
-          <li>오른쪽 위 <b>「추가」</b>를 누르면 홈 화면에 아이콘이 생깁니다.</li>
+          <li>Open the app in Safari.</li>
+          <li>Tap the <b>Share</b> button at the bottom center (a square with an arrow pointing up).</li>
+          <li>Scroll down and choose <b>“Add to Home Screen”</b>.</li>
+          <li>Tap <b>“Add”</b> at the top right. The icon appears on your home screen.</li>
         </ol>
-        <p class="note">아이폰의 크롬에서도 같은 공유 단추로 「홈 화면에 추가」할 수 있습니다.</p>
+        <p class="note">Chrome on iPhone has the same Share button with “Add to Home Screen”.</p>
       </section>
 
       <div class="after">
-        <h2>추가한 뒤에는</h2>
-        <p>홈 화면의 아이콘으로 열면 앱처럼 전체 화면으로 열립니다. 인터넷이 없어도 열리고, 새 판이 나오면 앱 안에서 알려 줍니다.</p>
-        <p>기록은 그 브라우저 안에만 저장됩니다. 브라우저의 사이트 데이터를 지우면 기록도 함께 지워지니, 지우기 전에 확인하세요.</p>
+        <h2>Once it's added</h2>
+        <p>Opening it from the home-screen icon gives you the full screen, like an app. It opens without an internet connection, and when a new version is out, the app tells you.</p>
+        <p>Your entries are stored only inside that browser. Clearing the browser's site data clears the entries too, so check before you do.</p>
       </div>
     </div>
   </main>
@@ -103,7 +103,7 @@
   <footer>
     <div class="container">
       <span class="brand">BBUL</span>
-      <span>이 안내는 BBUL의 웹앱에 함께 씁니다.</span>
+      <span>This guide is shared by BBUL's web apps.</span>
       <span class="r">© BBUL</span>
     </div>
   </footer>
@@ -111,9 +111,9 @@
 <script>
   (function(){
     var q=new URLSearchParams(location.search), app=q.get('app'), name=q.get('name');
-    if(app&&/^https:\/\//.test(app)){var a=document.getElementById('openApp');a.href=app;a.hidden=false;if(name)a.textContent=name+' 열기';}
-    if(name){document.getElementById('title').textContent=name+' — 홈 화면에 추가해 앱처럼 쓰기';document.title=name+' — 홈 화면에 추가해 앱처럼 쓰기';}
-    if(document.referrer&&new URL(document.referrer).origin===location.origin){var b=document.getElementById('backLink');b.href=document.referrer;document.getElementById('backText').textContent=name?name+' 제품 페이지':'돌아가기';}
+    if(app&&/^https:\/\//.test(app)){var a=document.getElementById('openApp');a.href=app;a.hidden=false;if(name)a.textContent='Open '+name;}
+    if(name){document.getElementById('title').textContent=name+' — add to your home screen and use it like an app';document.title=name+' — add to your home screen and use it like an app';}
+    if(document.referrer&&new URL(document.referrer).origin===location.origin){var b=document.getElementById('backLink');b.href=document.referrer;document.getElementById('backText').textContent=name?name+' product page':'Back';}
   })();
 </script>
 </body>
