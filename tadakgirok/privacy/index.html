@@ -8,6 +8,11 @@
 <link rel="alternate" hreflang="en" href="https://jsilver-p.github.io/tadakgirok/privacy/en/">
 <link rel="icon" href="../icon-192.png">
 <link rel="stylesheet" href="/bbul.css">
+<script>
+  /* 플레이 콘솔의 웹사이트·방침 주소는 하나이고 이 한국어 페이지다 — 브라우저 언어가 ko가 아니면 en/으로 보낸다(사용자 결정 2026-09-09, 1안).
+     되튕김 방지: 영어 페이지의 「한국어」 링크(?lang=ko)나 /en/에서 돌아온 경우엔 머문다. hreflang이 두 판을 검색엔진에 알린다. */
+  (function(){try{if(/^ko(-|_|$)/i.test(navigator.language||''))return;if(new URLSearchParams(location.search).get('lang')==='ko')return;if(/\/en\//.test(document.referrer))return;location.replace('en/'+location.hash)}catch(e){}})();
+</script>
 <style>
   main{max-width:720px;margin:0 auto;padding:var(--space-10) var(--pad-screen) var(--space-14);color:var(--color-text);word-break:keep-all;text-wrap:pretty}
   .kind{display:block;font-size:var(--fs-caption);letter-spacing:.12em;color:var(--color-text-muted)}

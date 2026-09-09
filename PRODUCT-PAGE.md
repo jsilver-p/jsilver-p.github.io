@@ -80,6 +80,8 @@
   `<head>`에 `hreflang` alternate 두 줄(ko·en), 방침·웹앱 안내도 같다. 방침은 머리 줄 오른쪽에 언어 링크.
 - **URL 규칙: 어느 페이지든 끝에 `/en`을 붙이면 영어**(사용자 2026-09-09) — `<제품>/` → `<제품>/en/`, `<제품>/privacy/` → `<제품>/privacy/en/`, `/webapp/` → `/webapp/en/`.
   그래서 방침은 파일이 아니라 폴더다. 옛 `privacy.html`은 `privacy/`로 넘기는 stub(플레이 콘솔에 등록된 주소).
+- **콘솔의 웹사이트·방침 주소는 하나(ko 페이지)** — 그래서 `<제품>/index.html`과 `<제품>/privacy/index.html` 머리의 스크립트가 브라우저 언어가 ko가 아니면
+  `en/`으로 보낸다. 영어 페이지의 「한국어」 링크는 `../?lang=ko`(머문다), `/en/`에서 돌아와도 머문다. 되튕김 없음을 사이트 저장소 밖 검사로 잰다(analogtypo `scripts/en-review.mjs` §7).
 - **영어 nav는 ≤480px에서** 현재 페이지 링크(`aria-current`)를 감추고 큰 글씨 단추는 아이콘만(`aria-label` 유지) — Product·How to use·Contact·[Large text]가
   406px, 360px 폰의 자리는 324px. 「Coming soon」은 준비 중보다 넓어 `.plat .btn.weak{width:100px}`.
 - **문안의 출처**: 01~04와 한눈에는 앱 저장소 `store/listing.md`의 en-US 절(■ 네 절·첫 목록), 쓰는 법은 `store/deck/usage.md`의 en 절. 앱 화면 이름은
